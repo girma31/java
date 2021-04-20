@@ -14,7 +14,7 @@ public class Account {
     public void setAccount_balance(int account_balance) {
         this.account_balance = account_balance;
     }
-    public int  deposite( int deposit) {
+    public int  credit( int deposit) {
         this.account_balance += deposit;
         return this.account_balance;
     }
