@@ -16,7 +16,7 @@ class Bank{
 
      */
      Account account = new Account();
-     System.out.println("Enter amount");
+     System.out.println("Enter amount of withdraw");
      Scanner  scnr = new Scanner(System.in);
      int amount = scnr.nextInt();
      account.setAccount_balance(amount);
