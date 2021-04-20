@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 class Bank{
 
@@ -11,11 +12,14 @@ class Bank{
               transfer
               check balance
               pay bill
-              
+
 
      */
      Account account = new Account();
-     account.setAccount_balance(10000);
+     System.out.println("Enter amount");
+     Scanner  scnr = new Scanner(System.in);
+     int amount = scnr.nextInt();
+     account.setAccount_balance(amount);
      account.credit(500);
      account.debit(1000);
      account.showData();
