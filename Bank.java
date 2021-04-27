@@ -15,6 +15,7 @@ class Bank{
 
 
      */
+    /*
      Account account = new Account();
      System.out.println("Enter amount of withdraw");
      Scanner  scnr = new Scanner(System.in);
@@ -23,5 +24,8 @@ class Bank{
      account.credit(500);
      account.debit(1000);
      account.showData();
+     */
+    extendThread th = new extendThread();
+    th.start();
     }
 }
