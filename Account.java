@@ -1,30 +1,110 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Account {
-   private int account_number =868776;
-   private int account_balance =200;
-    
-    public int getAccount_number() {
-        return account_number;
+    private String accountNo;
+    private String name;
+    private double balance;
+    private Transaction[] transactions = new Transaction[100];
+    private int totalTransaction;
+  
+    static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+    static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
+    static final String DEPOSIT = "Deposit";
+    static final String WITHDRAW = "Withdrawal";
+  
+    public Account() {}
+      
+    public Account(String accountNo, String name) {
+      this.accountNo = accountNo;
+      this.name = name;
     }
-    public void setAccount_number(int account_number) {
-        this.account_number = account_number;
+      
+    public Account(String accountNo, String name, double balance) {
+      this.accountNo = accountNo;
+      this.name = name;
+      this.balance = balance;
     }
-    public int getAccount_balance() {
-        return account_balance;
+  
+    public void deposit(double amount) {
+      balance = balance + amount;
+      Transaction transaction = new Transaction();
+      Calendar cal = Calendar.getInstance();
+      Date date = cal.getTime();
+      transaction.setTransactionDate(DATE_FORMAT.format(date));
+      transaction.setTransactionTime(TIME_FORMAT.format(date));
+      transaction.setAmount(amount);
+      transaction.setBalance(balance);
+      transaction.setKind(DEPOSIT);
+      transactions[totalTransaction++] = transaction;
     }
-    public void setAccount_balance(int account_balance) {
-        this.account_balance = account_balance;
+  
+    public void withdraw(double amount) {
+      if (amount > balance) {
+        return;
+      }
+      balance = balance - amount;
+      Transaction transaction = new Transaction();
+      Calendar cal = Calendar.getInstance();
+      Date date = cal.getTime();
+      transaction.setTransactionDate(DATE_FORMAT.format(date));
+      transaction.setTransactionTime(TIME_FORMAT.format(date));
+      transaction.setAmount(amount);
+      transaction.setBalance(balance);
+      transaction.setKind(WITHDRAW);
+      transactions[totalTransaction++] = transaction;
     }
-    public int  credit( int deposit) {
-        this.account_balance += deposit;
-        return this.account_balance;
+  
+    public String getName() {
+      return name;
     }
-    public int  debit( int debit) {
-        this.account_balance -= debit;
-        return this.account_balance;
+  
+    public void setName(String name) {
+      this.name = name;
     }
-    public void showData() {
-        System.out.println("Acoount number "+getAccount_number());
-        System.out.println("Account balance "+getAccount_balance());
+  
+    public String getAccountNo() {
+      return accountNo;
     }
-    
+  
+    public void setAccountNo(String accountNo) {
+      this.accountNo = accountNo;
+    }
+  
+    public long getBalance() {
+      return (long) balance;
+    }
+  
+    public void setBalance(double balance) {
+      this.balance = balance;
+    }
+  
+    public Transaction[] getTransactions() {
+      return transactions;
+    }
+  
+    public int getTotalTransaction() {
+      return totalTransaction;
+    }
+  
+    public void setTotalTransaction(int totalTransaction) {
+      this.totalTransaction = totalTransaction;
+    }
+  
+    public void setTransactions(Transaction[] transactions) {
+      this.transactions = transactions;
+    }
+  
+    @Override
+    public String toString() {
+      StringBuffer sb = new StringBuffer();
+      sb.append(accountNo);
+      sb.append("|");
+      sb.append(name);
+      sb.append("|");
+      sb.append(balance);
+  
+      return sb.toString();
+    }
 }

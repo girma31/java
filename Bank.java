@@ -1,43 +1,46 @@
 import java.util.Scanner;
 
 class Bank{
-
-   public static void main(String[] args) {
-     System.out.println("-----------------------------------------------------------------");
-     System.out.println("------------------------Welcome-----------------------------------");
-     /*
-              what do want 
-              deposit 
-              withdraw
-              transfer
-              check balance
-              pay bill
-
-
-     */
-    /*
-     Account account = new Account();
-     System.out.println("Enter amount of withdraw");
-     Scanner  scnr = new Scanner(System.in);
-     int amount = scnr.nextInt();
-     account.setAccount_balance(amount);
-     account.credit(500);
-     account.debit(1000);
-     account.showData();
-     */
+private Account []  accounts = new Account[10];
+private int totalAccount;
+public void addAccount(String accountNo, String name) {
+  accounts[totalAccount++] = new Account(accountNo, name);
+}
   
-    
-    Thread t1 = new Thread(new runnableThread(), "t1");
-    Thread t2 = new Thread(new runnableThread(), "t2");
-    System.out.println("Starting Runnable threads");
-    t1.start();
-    t2.start();
-    System.out.println("Runnable Threads has been started");
-    Thread t3 = new extendThread("t3");
-    Thread t4 = new extendThread("t4");
-    System.out.println("Starting MyThreads");
-    t3.start();
-    t4.start();
-    System.out.println("MyThreads has been started");
+public void addAccount(String accountNo, String name, double balance) {
+  accounts[totalAccount++] = new Account(accountNo, name, balance);
+}
+
+public Account getAccount(String accountNo) {
+  for (int i = 0; i < totalAccount; i++) {
+    if (accountNo.equals(accounts[i].getAccountNo())) {
+      return accounts[i];
     }
+  }
+  return null;
+}
+
+public Account[] findAccountByName(String name) {
+  Account[] temp = new Account[totalAccount];
+  int total = 0;
+  for (int i = 0; i < totalAccount; i++) {
+    if (name.equals(accounts[i].getName())) {
+      temp[total++] = accounts[i];
+    }
+  }
+  Account[] matched = new Account[total];
+  for (int i = 0; i < total; i++) {
+    matched[i] = temp[i];
+  }
+
+  return matched;
+}
+
+public Account[] getAccounts() {
+  return accounts;
+}
+
+public int getTotalAccount() {
+  return totalAccount;
+}
 }
