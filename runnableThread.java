@@ -1,11 +1,8 @@
-public class extendThread extends Thread{
-    public extendThread(String name) {
-        super(name);
-    }
+public class runnableThread implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("MyThread - START "+Thread.currentThread().getName());
+        System.out.println("Doing heavy processing - START "+Thread.currentThread().getName());
         try {
             Thread.sleep(1000);
             //Get database connection, delete unused data from DB
@@ -13,7 +10,7 @@ public class extendThread extends Thread{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("MyThread - END "+Thread.currentThread().getName());
+        System.out.println("Doing heavy processing - END "+Thread.currentThread().getName());
     }
 
     private void doDBProcessing() throws InterruptedException {
