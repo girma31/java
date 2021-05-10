@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 class Bank{
 private Account []  accounts = new Account[10];
 private int totalAccount;
